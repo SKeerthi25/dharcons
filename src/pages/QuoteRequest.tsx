@@ -20,7 +20,9 @@ export default function QuoteRequest() {
     const templateId = 'template_z0j4l1p';
     const publicKey = 'QrQx-xWydAfMZNM4D';
 
-    emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
+    emailjs.sendForm(serviceId, templateId, formRef.current, {
+      publicKey: publicKey,
+    })
       .then((result) => {
           console.log(result.text);
           setIsSubmitted(true);
@@ -86,7 +88,19 @@ export default function QuoteRequest() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="phone">Phone Number *</label>
-                  <input type="tel" id="phone" name="phone" required placeholder="07796 195185" />
+                  <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    required 
+                    placeholder="07796195185" 
+                    pattern="^(\d{10}|\d{12})$"
+                    title="Phone number must be exactly 10 or 12 digits"
+                    onInput={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      target.value = target.value.replace(/\D/g, '');
+                    }}
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="contactMethod">Preferred Contact Method</label>

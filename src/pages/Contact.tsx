@@ -22,7 +22,9 @@ export default function Contact() {
     const templateId = 'template_z0j4l1p';
     const publicKey = 'QrQx-xWydAfMZNM4D';
 
-    emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
+    emailjs.sendForm(serviceId, templateId, formRef.current, {
+      publicKey: publicKey,
+    })
       .then((result) => {
           console.log(result.text);
           setSubmitStatus('success');
