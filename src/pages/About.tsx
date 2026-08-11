@@ -1,4 +1,4 @@
-import { CheckCircle2, Award, Users, HardHat, Link as LinkIcon } from 'lucide-react';
+import { CheckCircle2, Award, Users, HardHat, Link as LinkIcon, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './PageStyles.css';
 
