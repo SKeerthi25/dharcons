@@ -1,14 +1,18 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Preloader from './components/Preloader';
+import CookieConsent from './components/CookieConsent';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
-import Process from './pages/Process';
-import FAQs from './pages/FAQs';
+import Process from './pages/Process'; 
+import FAQs from './pages/FAQs'; 
 import Contact from './pages/Contact';
-import QuoteRequest from './pages/QuoteRequest';
+import QuoteRequest from './pages/QuoteRequest'; 
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
 import Terms from './pages/Terms';
@@ -18,11 +22,22 @@ import Team from './pages/Team';
 import ProjectDetails from './pages/ProjectDetails';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <Router>
-      <div className="app">
-        <Header />
-        <main className="main-content">
+      <ScrollToTop />
+      {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+      
+      {!isLoading && (
+        <div className="app fade-in-app">
+          <style>{`
+            .fade-in-app {
+              animation: fadeIn 0.5s ease-out forwards;
+            }
+          `}</style>
+          <Header />
+          <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -42,7 +57,9 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <CookieConsent />
       </div>
+      )}
     </Router>
   );
 }

@@ -1,20 +1,36 @@
-import { useState } from 'react';
+import { useState, useRef, type FormEvent } from 'react';
 import { Send, Upload, CheckCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import './QuoteRequest.css';
 
 export default function QuoteRequest() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    if (!formRef.current) return;
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 1500);
+    setIsSubmitting(true);
+    setSubmitError(false);
+    
+    const serviceId = 'service_7uufa4i';
+    const templateId = 'template_z0j4l1p';
+    const publicKey = 'QrQx-xWydAfMZNM4D';
+
+    emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
+      .then((result) => {
+          console.log(result.text);
+          setIsSubmitted(true);
+      }, (error) => {
+          console.log(error.text);
+          setSubmitError(true);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   if (isSubmitted) {
@@ -48,7 +64,12 @@ export default function QuoteRequest() {
       
       <div className="section container">
         <div className="quote-form-container">
-          <form className="quote-form" onSubmit={handleSubmit}>
+          {submitError && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-md">
+              There was an error submitting your request. Please try again or contact us directly.
+            </div>
+          )}
+          <form ref={formRef} className="quote-form" onSubmit={handleSubmit}>
             {/* Honeypot field for spam protection */}
             <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
 

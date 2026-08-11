@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Home as HomeIcon, Shield, Clock, Users, Building, Wrench } from 'lucide-react';
 import { motion } from 'framer-motion';
 import './Home.css';
+import aboutImage from '../assets/image copy 14.png';
 
 export default function Home() {
   return (
@@ -76,7 +77,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 align-center gap-4">
             <div className="about-image-wrapper">
               <img 
-                src="https://images.unsplash.com/photo-1541888081622-c430e71350df?q=80&w=2670&auto=format&fit=crop" 
+                src={aboutImage} 
                 alt="UK Residential Construction" 
                 className="w-full h-[400px] object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-700" 
                 style={{ width: '100%', height: '400px', objectFit: 'cover' }}

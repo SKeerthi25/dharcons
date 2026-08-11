@@ -3,48 +3,71 @@ import { ArrowRight, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './Projects.css';
 
+import proj1 from '../assets/image copy 2.png';
+import proj2 from '../assets/image copy 4.png';
+import proj3 from '../assets/image copy 8.png';
+import proj4 from '../assets/image copy.png';
+import proj5 from '../assets/image copy 18.png';
+import proj6 from '../assets/image copy 19.png';
+import proj7 from '../assets/image copy 12.png';
+import proj8 from '../assets/image copy 10.png';
+
 const projects = [
   {
     id: 1,
     title: 'Modern Kitchen Extension',
     location: 'Croydon, South London',
     type: 'Extensions',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop'
+    image: proj1
   },
   {
     id: 2,
     title: 'Victorian Home Renovation',
     location: 'Surrey',
     type: 'Renovations',
-    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2670&auto=format&fit=crop'
+    image: proj2
   },
   {
     id: 3,
     title: 'Contemporary New Build',
     location: 'Greater London',
     type: 'New Builds',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2675&auto=format&fit=crop'
+    image: proj3
   },
   {
     id: 4,
     title: 'Loft Conversion',
     location: 'Croydon',
     type: 'Refurbishments',
-    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2670&auto=format&fit=crop'
+    image: proj4
   },
   {
     id: 5,
     title: 'Luxury Bathroom Redesign',
     location: 'South London',
     type: 'Renovations',
-    image: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=2670&auto=format&fit=crop'
+    image: proj5
   },
   {
     id: 6,
     title: 'Wrap-around Extension',
     location: 'Surrey',
     type: 'Extensions',
-    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2667&auto=format&fit=crop'
+    image: proj6
+  },
+  {
+    id: 7,
+    title: 'Open Plan Living Area',
+    location: 'Croydon',
+    type: 'Refurbishments',
+    image: proj7
+  },
+  {
+    id: 8,
+    title: 'Bespoke Property Construction',
+    location: 'Surrey',
+    type: 'New Builds',
+    image: proj8
   }
 ];
 

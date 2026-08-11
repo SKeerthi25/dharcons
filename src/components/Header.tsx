@@ -9,18 +9,18 @@ export default function Header() {
   return (
     <header className="header">
       <div className="container header-container">
-        <Link to="/" className="logo">
-          DHAR CONS <span>LTD</span>
+        <Link to="/" className="logo-link">
+          <img src="/logo.png" alt="DHAR CONS LTD" className="h-12 md:h-16" style={{ height: '60px', width: 'auto', objectFit: 'contain' }} />
         </Link>
 
         <nav className={`desktop-nav ${isOpen ? 'open' : ''}`}>
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/about" className="nav-link">About</Link>
-          <Link to="/services" className="nav-link">Services</Link>
-          <Link to="/projects" className="nav-link">Projects</Link>
-          <Link to="/process" className="nav-link">Our Process</Link>
-          <Link to="/faqs" className="nav-link">FAQs</Link>
-          <Link to="/contact" className="nav-link">Contact</Link>
+          <Link to="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</Link>
+          <Link to="/about" className="nav-link" onClick={() => setIsOpen(false)}>About</Link>
+          <Link to="/services" className="nav-link" onClick={() => setIsOpen(false)}>Services</Link>
+          <Link to="/projects" className="nav-link" onClick={() => setIsOpen(false)}>Projects</Link>
+          <Link to="/process" className="nav-link" onClick={() => setIsOpen(false)}>Our Process</Link>
+          <Link to="/faqs" className="nav-link" onClick={() => setIsOpen(false)}>FAQs</Link>
+          <Link to="/contact" className="nav-link" onClick={() => setIsOpen(false)}>Contact</Link>
         </nav>
 
         <div className="header-actions">

@@ -1,9 +1,40 @@
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState, useRef, type FormEvent } from 'react';
+import emailjs from '@emailjs/browser';
 import './PageStyles.css';
-import './QuoteRequest.css'; // Reuse form styles
+import './QuoteRequest.css';
 
 export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    // EmailJS credentials provided by user
+    const serviceId = 'service_7uufa4i';
+    const templateId = 'template_z0j4l1p';
+    const publicKey = 'QrQx-xWydAfMZNM4D';
+
+    emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
+      .then((result) => {
+          console.log(result.text);
+          setSubmitStatus('success');
+          formRef.current?.reset();
+      }, (error) => {
+          console.log(error.text);
+          setSubmitStatus('error');
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
   return (
     <div className="contact-page">
       <div className="page-hero">
@@ -58,27 +89,43 @@ export default function Contact() {
             
             <div className="contact-form-wrapper">
               <h3 className="mb-4 text-primary">Send us a Message</h3>
-              <form className="quote-form">
-                <div className="grid md:grid-cols-2">
-                  <div className="form-group">
-                    <label htmlFor="name">Name *</label>
-                    <input type="text" id="name" required placeholder="Your Name" />
+              {submitStatus === 'success' ? (
+                <div className="success-message text-center p-8 bg-green-50 border border-green-200 rounded-lg">
+                  <CheckCircle className="text-green-500 mx-auto mb-4" size={48} />
+                  <h3 className="text-xl font-bold text-green-800 mb-2">Message Sent!</h3>
+                  <p className="text-green-700">Thank you for contacting us. Our team will get back to you shortly.</p>
+                  <button onClick={() => setSubmitStatus('idle')} className="mt-4 btn btn-outline-dark text-sm">Send another message</button>
+                </div>
+              ) : (
+                <form ref={formRef} onSubmit={handleSubmit} className="quote-form">
+                  <div className="grid md:grid-cols-2">
+                    <div className="form-group">
+                      <label htmlFor="name">Name *</label>
+                      <input type="text" id="name" name="name" required placeholder="Your Name" />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="email">Email *</label>
+                      <input type="email" id="email" name="email" required placeholder="Your Email" />
+                    </div>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="email">Email *</label>
-                    <input type="email" id="email" required placeholder="Your Email" />
+                    <label htmlFor="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="How can we help?" />
                   </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="subject">Subject</label>
-                  <input type="text" id="subject" placeholder="How can we help?" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="message">Message *</label>
-                  <textarea id="message" rows={5} required placeholder="Your Message"></textarea>
-                </div>
-                <button type="button" className="btn btn-primary submit-btn">Send Message</button>
-              </form>
+                  <div className="form-group">
+                    <label htmlFor="message">Message *</label>
+                    <textarea id="message" name="message" rows={5} required placeholder="Your Message"></textarea>
+                  </div>
+                  
+                  {submitStatus === 'error' && (
+                    <div className="mb-4 text-red-500 text-sm font-medium">Failed to send message. Please try again or call us directly.</div>
+                  )}
+                  
+                  <button type="submit" disabled={isSubmitting} className="btn btn-primary submit-btn">
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </button>
+                </form>
+              )}
               
               <div className="mt-8 text-center">
                 <p className="opacity-80 mb-4">Looking for a detailed project quotation?</p>
