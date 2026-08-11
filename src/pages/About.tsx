@@ -1,6 +1,7 @@
 import { CheckCircle2, Award, Users, HardHat, Link as LinkIcon, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './PageStyles.css';
+import aboutImg from '../assets/image copy 13.png';
 
 export default function About() {
   return (
@@ -29,7 +30,7 @@ export default function About() {
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg h-96 bg-gray-200">
               <img 
-                src="https://images.unsplash.com/photo-1541888081622-c430e71350df?q=80&w=2670&auto=format&fit=crop" 
+                src={aboutImg} 
                 alt="UK Construction Team" 
                 className="w-full h-full object-cover"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
