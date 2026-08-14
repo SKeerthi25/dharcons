@@ -10,7 +10,7 @@ export default function Header() {
     <header className="header">
       <div className="container header-container">
         <Link to="/" className="logo-link">
-          <img src="/logo.png" alt="DHAR CONS LTD" className="h-12 md:h-16" style={{ height: '60px', width: 'auto', objectFit: 'contain' }} />
+          <img src="/logo.jpg" alt="DHAR CONS LTD" className="h-12 md:h-16" style={{ height: '60px', width: 'auto', objectFit: 'contain' }} />
         </Link>
 
         <nav className={`desktop-nav ${isOpen ? 'open' : ''}`}>
